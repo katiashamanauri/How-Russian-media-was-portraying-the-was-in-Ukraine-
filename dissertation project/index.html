@@ -1,0 +1,803 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+  <meta charset="utf-8">
+  <title>Data story with flourish</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="description" content="how-to-make-a-story">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+ 
+  <title>Data project: Space debris</title>
+  <link rel="stylesheet" href="./styles.css">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">  
+
+  <style>
+            @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,600');
+      *{
+        margin:0;
+        padding:0;
+      }
+    html,
+    body {
+      height: 100%;
+      padding: 0;
+      scroll-behavior: smooth;
+      font-family: 'Poppins', sans-serif;
+      color:black;
+      background-color: #F5F5F5;
+      font-weight: 300;
+    }
+
+    .wrapper {
+      padding: 96px 0;
+    }
+
+    .font-secondary {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .text-h1 {
+      font-size: 36px;
+      line-height: 52px;
+
+      @media (min-width: @screen-sm-min) {
+        font-size: 32px;
+        line-height: 48px;
+      }
+    }
+
+    .text-h2 {
+      font-size: 32px;
+      line-height: 36px;
+      font-weight: 500;
+
+      @media (min-width: @screen-sm-min) {
+        font-size: 28px;
+        line-height: 32px;
+      }
+    }
+
+    .myphoto {
+      margin-bottom: 0px;
+    }
+    .text-body-1 {
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 32px;
+
+      @media (min-width: @screen-sm-min) {
+        font-size: 18px;
+        line-height: 28px;
+      }
+    }
+
+    .text-body-2 {
+      font-size: 40px;
+      font-weight: 400;
+      line-height: 32px;
+      font-family: 'Poppins', sans-serif;
+
+      @media (min-width: @screen-sm-min) {
+        font-size: 14px;
+        line-height: 24px;
+      }
+    }
+
+    .blockquote {
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 36px;
+      text-transform: uppercase;
+      text-align: center;
+
+      @media (min-width: @screen-sm-min) {
+        font-size: 28px;
+      }  
+    }
+
+    .text-caption {
+      font-size: 14px;
+      line-height: 22px;
+
+      @media (min-width: @screen-sm-min) {
+        font-size: 12px;
+        line-height: 18px; 
+      }
+    }
+
+ 
+    a {
+      color: #104E8B !important;
+      border-bottom: 2px solid #104E8B;
+      text-decoration: none;
+      word-break: break-word;
+    }
+
+    
+
+    /* Small devices (tablets, 768px and up) */
+    /* @media (min-width: @screen-sm-min) { ... } */
+
+    /* Medium devices (desktops, 992px and up) */
+    /* @media (min-width: @screen-md-min) { ... } */
+
+    /* Large devices (large desktops, 1200px and up) */
+    /* @media (min-width: @screen-lg-min) { ... } */
+
+    #scrolly__section {
+      position: relative;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      /* background-color: #f3f3f3; */
+      padding: 1rem;
+    }
+
+    #scrolly__section > * {
+      -webkit-box-flex: 1;
+      -ms-flex: 1;
+      flex: 1;
+    }
+
+    .scrolly__content {
+      position: relative;
+      padding: 0 1rem;
+      width: 100%;
+    }
+
+    .scrolly__chart {
+      position: -webkit-sticky;
+      position: sticky;
+      width: 100%;
+      margin: 0;
+      -webkit-transform: translate3d(0, 0, 0);
+      -moz-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+      z-index: 0;
+    }
+
+    .scrolly__chart iframe {
+      width: 100%;
+      height: 100%;
+    }
+
+    .step {
+      margin: 0 auto 2rem auto;
+      /*border: 2px solid #104E8B; */
+      display: flex;
+      justify-content: center;
+      align-items: start;      
+    }
+
+    .step:last-child {
+      margin-bottom: 0;
+    }
+
+    .text-block.is-active {
+      background-color: #F5F5F5;
+      color: black;
+    }
+
+    .text-block {
+      background-color: #F5F5F5;
+    }
+
+    .step p {
+      text-align: center;
+      padding: 1rem;
+    }
+
+    iframe {
+      border: unset;
+    }
+
+
+    .headline2 {
+    text-align:center;
+    color: black;
+    padding-left:50px;
+}
+/* per la frase introduttiva */
+.title-container{
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: 20%;
+    left: 0%;
+    transform: translateY(-50%);
+    
+}
+.scroll-container{
+    position: absolute;
+    width: 50%;
+    height: auto;
+    top: 200%;
+    left: 0%;
+    transform: translateY(-50%);
+}
+
+.title{
+    color: black;
+    padding: 0 2rem;
+    margin-top: 30em;
+    margin-bottom: 35em;
+}
+
+.title h1{
+    text-transform: uppercase;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 2200;
+    font-size: 35px;
+    text-align: center;
+    margin-top: 10em;
+    margin-bottom: 10em;
+    font-weight:800;
+    line-height: 70px;
+
+}
+.title h3{
+    text-transform: uppercase;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    font-size: 25px;
+    margin-top: 1.25em;
+    font-weight:300;
+}
+
+.subtitle{
+    text-align: center;
+    position: absolute;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    color: white;
+    width: 85%;
+    margin: 1rem 0;
+    margin-top: 14em;
+    margin-left: 5em;
+    font-size: 18px;
+}
+.authors{
+    text-align: center;
+    position: absolute;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    color: white;
+    width: 85%;
+    margin: 1rem 0;
+    margin-top: 17em;
+    margin-left: 5em;
+    font-size: 13;
+    font-weight: 500;
+    
+}
+.date{
+    text-align: center;
+    position: absolute;
+    font-family: 'Poppins', sans-serif;
+    font-weight:lighter;
+    color: white;
+    width: 85%;
+    margin: 1rem 0;
+    margin-top: 18.5em;
+    margin-left: 5em;
+    font-size: 11;
+    
+}
+.scroll_title{
+    text-align: center;
+    position: absolute;
+    font-family: 'Poppins', sans-serif;
+    font-weight:600;
+    color: white;
+    width: 85%;
+    margin: 1rem 0;
+    margin-top: 26em;
+    margin-left: 4.7em;
+    font-size: 9;
+    
+}
+.text-h2 font-secondary mb-3{
+  position: absolute;
+  text-align: center;
+  margin-left: 4.7em;
+  font-size: 9
+}
+
+
+.scroll-down {
+  height: 50px;
+  width: 30px;
+  border: 2px solid white;
+  position: absolute;
+  left: 98%;
+  bottom: -220px;
+  border-radius: 50px;
+  cursor: pointer;
+}
+.scroll-down::before,
+.scroll-down::after {
+  content: "";
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  height: 10px;
+  width: 10px;
+  transform: translate(-50%, -100%) rotate(45deg);
+  border: 2px solid white;
+  border-top: transparent;
+  border-left: transparent;
+  animation: scroll-down 1s ease-in-out infinite;
+}
+.scroll-down::before {
+  top: 30%;
+  animation-delay: 0.3s;
+  /* animation: scroll-down 1s ease-in-out infinite; */
+}
+.webgl{
+  display: block;
+}
+
+@keyframes scroll-down {
+  0% {
+    /* top:20%; */
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    top: 90%;
+    opacity: 0;
+  }
+}
+
+.myfooter {
+  margin-top: 20em;
+  margin-bottom: 1em;
+  text-align: center;
+}
+    
+  </style>
+</head>
+  <body>
+
+    <img src="Ukraine2.png" alt="placeholder" width=100% height=95% class="myphoto"/>
+        
+   
+    <div class="wrapper">
+      <div class="container py-5">
+        <div class="row justify-content-center">
+          <div class="col-lg-7 col-11">
+              <h2> War in Ukraine: How Russian media was portraying the invasion?</h2>
+           <br>
+      
+            <!--<h1 class="text-body-2 mb-5">Title here</h1>
+
+            <img src="space-junk1.jpg" alt="placeholder" width=100% class="mb-5 py-2" />          
+
+            <h3 class="text-h2 font-secondary mb-3">subtitle here</h3>  
+
+            <!--<div class="flourish-embed flourish-chart mt-3" data-src="visualisation/9816068"> 
+            </div>
+            <p class="text-caption mb-5 text-center">caption: here is a flourish chart and I basically plonked this in here exactly like how I get from the embed instructions</p> -->           
+
+            <p class="text-body-1 mb-4">On March 1, Katerina Kotrikadze, a former anchor of the Russian pro-oppositional TV Channel Rain and currently a journalist in exile, was on her way home in Moscow after a long and hard day when she received breaking news saying that TV company she worked for had been blocked. Some sources also told her that the Russian Special Forces were heading towards Rain's building, but they never showed up. Since TV Rain was eventually silenced by the government, Katerina and her family had to leave Russia immediately. </p>
+            <p class="text-body-1 mb-4">
+              “My husband, who was an editor of TV Rain, returned home very late that night and I thought that I had already lost him. Each night, I went to bed thinking that special forces might arrive at 6AM. We had a place where we could hide our phones and laptops. Millions of times I imagined explaining what was happening to my daughter. I don't know how they let us flee the country, probably they wanted to get rid of us”, says Katerina Kotrikadze.     
+            </p> 
+            <p class="text-body-1 mb-4">
+              In the early days of the Russian invasion of Ukraine, a few pro-oppositional media outlets in Russia offered alternative perspectives about the war, but Kremlin narratives still dominated the Russian media. Headlines collected from the leading Russian media organizations such as 1tv, Izvestia, Lenta, Gazeta, and Ria between February 24 and March 2, show that sanctions and other measures implemented against Russia were the only directions that Russian media covered in granular detail.    
+            </p> 
+            <p class="text-body-1 mb-4">
+        
+            </p> 
+            <p class="text-body-1 mb-4">
+        
+            </p> 
+
+            
+
+            <p class="text-body-1 mb-4">
+            
+            </p> 
+                
+
+            <!--<p class="text-body-1 mb-5">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam architecto obcaecati alias delectus, illo non nam ad, accusamus magnam <em>italics here</em> <a href="" target="_blank">random link here</a> ipsa accusantium ratione praesentium dolores nesciunt ab officia quisquam excepturi sunt?
+            </p> -->
+            
+
+            <!--<img src="space-junk.jpg" alt="placeholder" width=100% class="mb-5 py-2" />
+
+            <h3 class="text-h2 font-secondary mb-3">subtitle here</h3> -->
+
+            <!--<p class="text-body-1 mb-4">
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error dolor, quos aut repellendus quia porro temporibus magni unde, rerum quasi aperiam, eligendi ducimus aliquam fugiat quas autem labore id consectetur.
+            </p>   -->      
+          </div>
+        </div>
+      </div>
+      
+      <div class="container-fluid" id="root">
+        <div class="row justify-content-center" id="scrolly__section">
+          <div class="col-4 scrolly__content">
+            <div class="step" data-step="1">
+              <div class="text-block pa-2">
+                <!--<p class="text-body-2" style="font-size: 32px; font-weight: 600;">What are space debris?</p><br>-->
+                <p style="font-size: 20px; font-weight: 500;"> 5 Russian media outlets published around 8478 articles about the war in Ukraine throughout the first week of the invasion</p>
+              </div>
+            </div>
+            <div class="step" data-step="2">
+              <div class="text-block pa-2">
+                <p class="text-body-2"></p>
+                <p class="text-body-2" style="font-size: 20px; font-weight: 500;">More than a half 4445 pieces were about sanctions and other measures against the Kremlin </p>
+              </div>            
+            </div>
+            <div class="step" data-step="3">
+              <div class="text-block pa-2">
+                <p class="text-body-2"></p>
+                <p class="text-body-2" style="font-size: 20px; font-weight: 500;"> 2533 pieces sought to justify Russia’s actions in Ukraine in different ways </p>
+              </div>            
+            </div>
+            <div class="step" data-step="4">
+              <div class="text-block pa-2">
+                <p class="text-body-2"></p>
+                <p class="text-body-2" style="font-size: 20px; font-weight: 500;">577 articles discussed negotiation process </p>
+              </div>            
+            </div>
+            <div class="step" data-step="5">
+              <div class="text-block pa-2">
+                <p class="text-body-2"></p>
+                <p class="text-body-2" style="font-size: 20px; font-weight: 500;">348 pieces emphasized Russia's advantage, reporting that Russian armed forces were defeating Ukrainians </p>
+              </div>            
+            </div>
+            <div class="step" data-step="6">
+              <div class="text-block pa-2">
+                <p class="text-body-2"></p>
+                <p class="text-body-2" style="font-size: 20px; font-weight: 500;">575 articles illustrated the level of support a few countries showed for Russia. </p>
+              </div>            
+            </div>
+          </div>
+
+          <div class="col-6 scrolly__chart">
+            <iframe scrolling="no" src="https://flo.uri.sh/story/1652368/embed#slide-0"></iframe>
+          </div>
+        </div>        
+      </div>
+
+      <!--<div>static paragraph</div> 
+
+
+
+    </div>
+
+    <div class="wrapper">
+      <div class="container py-5">
+        <div class="row justify-content-center">
+          <div class="col-lg-7 col-11">
+            <p class="text-body-2 mb-5">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit dolorem iusto, vel, cum est architecto odit quia culpa sed ex ipsa praesentium alias ullam tempore numquam aliquid aspernatur, provident nesciunt!
+            </p>
+
+            <img src="space-photo.jpg" alt="placeholder" width=100% class="mb-5 py-2" />          
+
+            <h3 class="text-h2 font-secondary mb-3">Text here</h3>  
+
+          </div>
+          </div>
+          </div>
+          </div>-->
+
+          <!--<div id = "chart-area3">
+            <p class="headline2">Space junks move around the earth at 10 times the speed of a bullet</p>
+            <p class="headline2">This circle moves at the speed of a bullet from left to right</p> -->
+      
+         
+        <div class="wrapper">
+              <div class="container py-5">
+                <div class="row justify-content-center">
+                  <div class="col-lg-7 col-11">
+                    <!--<h1 class="text-body-2 mb-5">Title here</h1>
+        
+                    <img src="space-junk1.jpg" alt="placeholder" width=100% class="mb-5 py-2" />          
+        
+                    <h3 class="text-h2 font-secondary mb-3">subtitle here</h3>  
+        
+                    <!--<div class="flourish-embed flourish-chart mt-3" data-src="visualisation/9816068"> 
+                    </div>
+                    <p class="text-caption mb-5 text-center">caption: here is a flourish chart and I basically plonked this in here exactly like how I get from the embed instructions</p> -->           
+        
+                    
+                    <p class="text-body-1 mb-4">
+                      "There was a major emphasis on sanctions to convince people that the entire west was against Russia. Look how fiercely are they fighting against us? – this was the government’s message. On the other hand, showing that some countries, such as China, India, and few others were not joining the sanctions, was a way to stress that a new market was opening up for Russians”, - says Katerina Kotrikadze.  </p>
+                      
+                      <p class="text-body-1 mb-4">
+                        By focusing on sanctions the Kremlin attempted to distract the attention from the tragedy unfolding in Ukraine and promote its own version of events. The number of articles published about the Western sanctions against Russia has been increasing during the first week of the war, but the harsh reality in Ukraine was completely ignored by the Russian media. All the pieces that described the situation in Ukraine represented an attempt to justify Kremlin’s decisions and focused on the potential threat from the west.  </p>
+        
+                        <div class="flourish-embed flourish-chart" data-src="visualisation/10901290"><script src="https://public.flourish.studio/resources/embed.js"></script></div>
+                  
+                        <!--  <hr class="line-divider my-5 py-lg-2" />
+
+                   <p class="blockquote font-secondary ">
+                      “Space debris could damage or worsen the services we use.”
+                    </p>
+        
+                    <hr class="line-divider my-5 py-lg-2" /> -->     
+                    
+                    
+        
+                    <!-- To insert link and italics
+                      <p class="text-body-1 mb-5">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam architecto obcaecati alias delectus, illo non nam ad, accusamus magnam <em>italics here</em> <a href="" target="_blank">random link here</a> ipsa accusantium ratione praesentium dolores nesciunt ab officia quisquam excepturi sunt?
+                    </p> -->
+                    <p class="text-body-1 mb-4"> “The idea was to explain, why it was kind of a necessity, in other words why starting the war was inevitable,” says Stansilav Budnitsky, who has worked on Russian media politics for years. Originally from Russia, Stanislav currently is based in the USA and has been following the Russian media coverage of the war since its early days. He thinks that the Kremlin’s main messages largely revolved around the west. 
+                      </p>
+                    
+        
+                    <!--<img src="space-junk.jpg" alt="placeholder" width=100% class="mb-5 py-2" />
+        
+                    <h3 class="text-h2 font-secondary mb-3">subtitle here</h3> -->
+        
+                    <p class="text-body-1 mb-4">“We were given no choice, we were backed into the corner, - this was the main narrative. Ukrainian Nazi are kind of puppets of the West. And at the same time, they're victims, because the West is using Ukraine to advance its goals and now all Ukrainians are going to die, because of the west”, - says Stanislav Budnitsky.
+                 </p>     
+                
+                 <p class="text-body-1 mb-4">On February 24, when Russia started bombarding the biggest cities and firing missiles on populated areas, loud sirens became a constant presence in Ukrainians’ daily life. People were hunkering down in bomb shelters, basements, and subway stations. On March 2, The United Nations Human Rights Monitoring Mission in Ukraine said  that during the first 5 days of the war, it had recorded 752 civilian casualties in Ukraine. 
+        
+                </p> 
+                <p class="text-body-1 mb-4"> Katerina Kontrikadze vividly remembers the first days of the war, when TV Rain was still broadcasting in Russia. “I didn't cry only when I was on air”, she says. TV Rain was among a few pro-oppositional media companies in Russia, where people could hear the voices from Ukraine about the ongoing situation in the war zone.
+            
+                </p>   
+                     
+
+                    <p class="text-body-1 mb-4">  “In our programs, we had politicians, colleagues, and ordinary citizens from Ukraine telling us horrible stories about bombings, waiting for death in bunkers. In the 21st century, Russia started a large-scale war and killed innocent citizens. I am a Russian journalist and this was a catastrophe for me.”- says Katerina Kotrikadze.  </p>
+                    <p class="text-body-1 mb-4"> Thousands of headlines from leading Russian media outlets show that not a single piece has been published about the victims and injured citizens in Ukraine. Russian media, however, presented a completely different picture, portraying Ukrainians as aggressors who killed innocent civilians in the eastern region.   </p>
+                   
+                  <br>
+                   <h2>Against and anti–the most frequently mentioned words in Russian media</h2>
+                   <br>
+                     <p class="text-body-1 mb-4"> According to headlines collected from the leading Russian media outlets, anti-Russian, against, and sanctions were the most commonly used words during the first week of the war. Of the 8478 headlines, on average one out of six included the words: against, anti, or sanctions.   </p>
+                     
+                     <div class="flourish-embed" data-src="visualisation/10907268"><script src="https://public.flourish.studio/resources/embed.js"></script></div>
+                     <p class="text-body-1 mb-4"> Vasily Polonsky, a Russian journalist who worked for TV Rain, is not surprised by this trend. Still residing in Moscow, Vasyli seeks to be involved in alternative media. He runs a Youtube channel, writes articles for different publications, and quite often works without earning a penny. As Vasily explains, the term "sanctions" is extremely vulnerable for Russian society.  </p>
+                     <p class="text-body-1 mb-4"> "Sanctions do not ruin Putin's life, they affect us - ordinary citizens. This is not perceived as a way to assist; it is viewed as an attack on us and unites Russian people”, - says Vasily. </p>
+                     <p class="text-body-1 mb-4">"Anti-Russian is the most interesting word to me. I recall Putin's letter from 2001, in which he said Ukraine does not exist, Ukrainians do not exist as a people. Putin used the term – anti-Russian in his letter, later experts started mentioning it, and now we hear “anti-Russian” quite often”, - says Katerina Kotrikadze.    </p>
+                     <p class="text-body-1 mb-4">Another term that frequently appeared in headlines across 5 Russian media outlets was “Ukrainian armed forces”. The most interesting part in this case is the context in which Russian media used these words. In the vast majority of headlines "Ukrainian armed forces" was followed by the term “opened fire”, indicating that Ukrainians were assaulting peaceful citizens in the eastern regions of the country. In other cases, Russian media was reporting that Russians were successfully taking various cities and defeating Ukrainian armed forces.  </p>
+                     <p class="text-body-1 mb-4"> While 1050 pieces mentioned either Lugansk or Donetsk, eastern regions of Ukraine, only 99 headlines mentioned Kyiv in the context of the situation there. Interestingly, all of them sought to justify Russia's actions by showing that its military forces were not targeting ordinary citizens in the capital and they were not posing a threat.  </p>
+                     <p class="text-body-1 mb-4">1050 articles mentioning Lugansk and Donetsk claimed that Ukrainian armed forces were assaulting and killing civilians in that part of the country. The vast majority of headlines mentioning those regions were about Ukrainians’ bloody attacks against local citizens.  </p>
+                     <p class="text-body-1 mb-4"> Selecting the right words while reporting has always been a key issue for the Kremlin. In the early days of the war, the Russian government warned that referring to the ongoing military campaign as an “invasion”, “attack” or “declaration of war” would cause problems for the local media. Instead journalists had to use “special operation”.  </p>
+                     <p class="text-body-1 mb-4"> Later the Russian parliament approved a law criminalising the intentional spreading of what Russia deemed to be “fake” reports. According to the new law, Russians could face prison sentences for disseminating information that goes against the Russian government’s position on the war in Ukraine.  </p>
+                     <p class="text-body-1 mb-4"> On February 26 one of the main news in Russia was the statement by Roskomnadzor (The Federal Service for Supervision of Communications, Information Technology and Mass Media) asking a few Russian media organizations, including TV Rain, to remove false information about the so-called operation in Ukraine. Katerina Kotrikadze recalls a phone call from Roskomnadzor to her husband, who worked as an editor in chief at TV Rain in Moscow. </p>
+                     <p class="text-body-1 mb-4"> “It happened for the first time since he started working on this position two and a half years ago. He was told by Roskomnadzor's representative - I know you are a professional and could you pay attention to the words you use? You should rely on the official position of Russia. My husband told her that we were relying Moscow's position, but we were also covering Ukraine's position”, says Katerina Kotrikadze. </p>
+                     <p class="text-body-1 mb-4">  "Okay, be careful", those were the last words the representative of Roskomnadzor said to the editor in chief. Later, TV Rain also received an official letter, and the editor eventually decided to remove that particular piece. “ Working as a journalist in Russia unfortunately means being prepared to make compromises”, Says Katerina. The Russian government, however, still blocked TV Rain in a few days.  </p>
+                 
+                     <br>
+                     
+                     <h2>How the Kremlin controls narratives in Russian media?</h2>
+                     <br>
+                     <p class="text-body-1 mb-4"> “I don’t know how they wanted to get undressed, above or below the waist, But I think it would be a disgusting sight in any case,” – This is Vladimir Putin’s comment about the G7 leaders during his visit in Tajikistan. When asked about Western leaders mocking his shirtless pictures at the G7 summit, Russian president noted that to look good it’s essential to stop abusing alcohol and other bad habits.  </p>
+                     <p class="text-body-1 mb-4"> There is no doubt that Putin and the western leaders have had strained relations for a long time and not surprisingly it has always been reverberated in Russian media. This attitude became particularly evident after the start of the war in Ukraine. Each headline mentioning Biden, Johnson, Macron, and other leaders was a remainder for Russian people, that their goal is and has always been to ruin their country.   </p>
+                     
+                     <div class="flourish-embed flourish-chart" data-src="visualisation/10916765"><script src="https://public.flourish.studio/resources/embed.js"></script></div>
+                     
+                     <p class="text-body-1 mb-4"> The most frequently mentioned western leader was Joe Biden, who appeared 398 times in the headlines of 5 Russian media publications throughout the first week of the war. The most often used words alongside the name of the American president were against and sanctions.  </p>
+                     <p class="text-body-1 mb-4"> Although Boris Johnson appeared only 43 times in 5 Russian media outlets between February 24 and March 2, the British prime-minister's radical stance was strongly emphasized.    </p>
+                     <p class="text-body-1 mb-4"> “ In response to Russia's actions in Ukraine, Johnson promised a strong Western reaction”,  “Johnson called on the West to isolate Putin politically”,  
+                      “Johnson promised to squeeze Russia out of the world economy”,“Johnson considers the West should isolate Putin” – These are a few examples of headlines that illustrated to Russians that the British prime-minister was one of the architects of anti-Russian politics. 
+                       </p>
+                     <p class="text-body-1 mb-4">In the wake of the Western leaders' "hostile" measures and statements, Russian media didn't forget to promote the Kremlin's version of events by quoting Putin's allies. Lukashenko was the most frequently mentioned leader after Zelensky and Putin. The name of the Belarusian president emerged 160 times in headlines and the word – negotiations was one of the most commonly used terms alongside Lukashenko, an attempt to portray him as a mediator during those difficult times.   </p>
+                
+                     <p class="text-body-1 mb-4">Russian media has devoted special attention to quotes from leaders and foreign diplomats expressing support for the government’s decisions. It was a perfect opportunity to demonstrate that some people publicly shared Kremlin's narratives.   </p>
+                     <p class="text-body-1 mb-4">Early morning on February 27, Russian media outlets published a piece about the tweet by Chinese diplomat Lijian Zhao. A representative of the Chinese foreign ministry posted a caricature about the war in Ukraine and wrote – “The US should ask itself who's the one that started all these”.  </p>
+                     
+                     <img src="photo55.jpg" alt="placeholder" width=100% class="mb-5 py-2" />
+                     
+                     <p class="text-body-1 mb-4"> Interestingly, the titles of this particular story were almost identical on all media platforms. “Chinese Foreign Ministry hinted at US responsibility for Ukraine” - This headline was published word for word by several Russian media outlets, although some made minor changes, the phrase - "hinted at US responsibility" remained the same across all media publications.  </p>
+                     <p class="text-body-1 mb-4">There are many other examples in Russian media when almost identical headlines appear. Furthermore, different publications report the same topics and angles most of the time.   </p>
+                     <p class="text-body-1 mb-4"> Kotrikadze is familiar with the rules Russian media has to follow and knows how all headlines are generated behind the scenes.  </p>
+                     <p class="text-body-1 mb-4"> “Alexey Gromov, who works in the President's administration, oversees the media coverage. Every week, he meets with editors and journalists from every publication, radio station, and TV station. It is no secret that everyone attends these meetings, but I have never been. It is Gromov who is passing information about how to report, what topics to cover, and what words to use. Additionally, editors receive emails from Kremlin on a regular basis”, - says Katerina.  </p>
+                     <p class="text-body-1 mb-4"> According to the Kremlin’s official website, Alexei Gromov is the first deputy chief of staff of the Presidential Administration in Russia. Gromov is a politician and Soviet-Russian diplomat. Having spent a long time in Putin’s inner circle, it is widely believed that he enjoys the unlimited confidence of the Russian president. According to Russian investigative journalists, Gromov is responsible for state propaganda, making instructions and directives for leading media outlets. </p>
+                     <p class="text-body-1 mb-4"> It is highly likely that his job has become easier over the last few months, since all oppositional media outlets have disappeared in Russia. Stansilav Budnitsky confirms that there is no nationwide oppositional media in Russia after the new law about fake news was passed. </p>
+                     <p class="text-body-1 mb-4"> “It's a very harsh law. It led basically to the exodus of Russian journalists abroad. And it led to the shutdown of almost all independent media outlets. Independent journalists realised that they could not report under this law", says Stanislav. </p>
+                     <p class="text-body-1 mb-4">Russian TV Rain was back on air from Latvia in July, after being forced off air in Russia. It will stream its programs on its YouTube channel, a platform that is not censored in Russia.   </p>
+                     <p class="text-body-1 mb-4">Various independent Russian journalists chose different routes to escape the Kremlin's censorship. Some of them moved to another country, others launched their own YouTube and telegram channels, and a few of them decided to stay in their home country and fight for their rights as journalists.  </p>
+                     <p class="text-body-1 mb-4">Vasily Polonsky is not afraid to refer to Russia's actions in Ukraine as a war instead of as a military operation, and is determined to cover all vulnerable topics independently, according to journalism standards.    </p>
+                     <p class="text-body-1 mb-4">  “Why should I leave? Because of Putin? I won’t go anywhere because of him. He is not my president, I didn’t vote for him, he violated the law, killed journalists, including some of my friends. He jailed human rights defenders and acitivists. Why should I leave? This is my fight”, - says Polonsky.   </p>
+                     
+                   
+                     <br>
+                     
+                     <h2>“Contradictory lies” in Russian media </h2>
+                     <br>
+                     
+                     <p class="text-body-1 mb-4"> Masha, not her real name, fled Russia shortly after the war in Ukraine started. Her family is still based in Moscow and as she says, “speaking up is becoming more and more dangerous in Russia”. We changed her name to protect her identity and her family from the potential threat.  </p>
+                     <p class="text-body-1 mb-4">In the wake of the Russian invasion of Ukraine, Masha realized that she could not stay in her home country, so she and her friends moved to neighboring Georgia. She is currently involved in various campaigns to assist Ukrainians during the war.   </p>
+                     <p class="text-body-1 mb-4"> “I am lucky to have friends, family and everyone around me who feel the same way I do about the war", says Masha.  </p>
+                   
+                     <p class="text-body-1 mb-4"> As an active citizen, she has always been following the news about Russian politics and understands how Russian media works in her country, however some coverage still comes as a surprise to her.  </p>
+                     <p class="text-body-1 mb-4"> “I recall when I was listening to the pro-governmental radio station in Moscow, my first thought was - how dumb is that? Really? Is this the way of lying? When you compare the things, one day they say something and the next day they report completely contradictory news," says Masha. </p>
+                     <p class="text-body-1 mb-4">On the third day of the war, all the leading international media outlets were reporting that Zelensky refused the US offer to evacuate, saying 'I need ammunition, not a ride'. Those words appeared everywhere - on social media, in newspapers, and magazines, but they couldn't reach Russian media. Moreover, leading Russian publications claimed the same day that Zelensky had left Kyiv, quoting state duma representatives.   </p>
+                     <p class="text-body-1 mb-4">Every time the western media talked about the Ukrainian resilience and strength in the face of the war, Russian media outlets reported that Ukrainian armed forces started giving up positions and weapons. While international publications covered stories about the casualties in Ukraine from missiles raining down across the country, Russian media claimed that Ukrainian “nationalists” were assaulting residential areas in Donbass and Donetsk.   </p>
+                   
+                 
+                    </div>
+                </div>
+              </div>
+             
+              <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img src="photo1.png" class="d-block w-100" alt="Headlines">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="photo2.png" class="d-block w-100" alt="Headlines">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="photo3.png" class="d-block w-100" alt="Headlines">
+                  </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+          
+                <div class="wrapper">
+                  <div class="container py-5">
+                    <div class="row justify-content-center">
+                      <div class="col-lg-7 col-11">
+                               
+            
+                      
+            
+                        <p class="text-body-1 mb-4"> "Usually, if you read the article of an independent journalist, it is easy to tell which part is a fact and which part is their opinion. When it comes to Russian pieces, things are different. You should read everything very carefully, in order to find out if there is any truth at all." says Vasyli Polonsky. </p>
+                        <p class="text-body-1 mb-4"> Most of the time, he says, this is not fake news, but just stupid lies. "My niece lies to me like this, when he tries to hide something from me", says Polonsky.   </p> 
+                        <p class="text-body-1 mb-4"> Analytic center Levada in Russia conducted a survey in March and asked Russians if they supported Russian military actions in Ukraine? According to the Levada Center, 53% of respondents strongly supported, 28% said - yes, 8% responded - no, 6% strongly disagreed, and 6% said it was hard to answer.   </p> 
+                        <p class="text-body-1 mb-4"> The biggest question outstanding is if Russian people believe the state propaganda. Vasily deems that it is difficult to find out what people actually think about the war, since majority of citizens is afraid to speak up.  </p> 
+                        <p class="text-body-1 mb-4"> “It seems to me that those who support the war are much fewer than those who strongly oppose it. Nevertheless, people who approve of government actions are more visible because they wear shirts with Z or put it on their cars. I tried to have a dialogue with them, listen to their opinions, they usually rely on quotes from Putin, Soloviev, and others. They don't know anything about the data and history”, - says Vasily.    </p> 
+                        
+                        <!--<hr class="line-divider my-5 py-lg-2" />
+            
+                        <p class="blockquote font-secondary ">
+                          “They could irreparably compromise space sustainability”
+                        </p>
+            
+                        <hr class="line-divider my-5 py-lg-2" />-->
+                                                  
+                        <p class="text-body-1 mb-4">
+                          </p>
+                       
+<footer> 
+  <div class="myfooter">
+    <p>By Khatia Shamanauri</p>
+    <p>September, 2022</p>
+  </div>
+  
+</footer>
+              
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="module" src="./index.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/d3@5.9.1/dist/d3.min.js"></script>
+    <script src="https://unpkg.com/intersection-observer"></script>
+    <script src="https://unpkg.com/scrollama"></script>    
+    <script src="https://public.flourish.studio/resources/embed.js"></script>
+    
+
+    <!-- This code from here on is derived from the side-by-side code example from the scrollama library which can be found here: https://github.com/russellgoldenberg/scrollama  -->
+    <!-- I tweaked the function for handleStepEnter to accomodate the Flourish story! -->
+
+    <script>
+      var scrolly = d3.selectAll("#scrolly__section");
+      var chart = scrolly.selectAll(".scrolly__chart");
+      var content = scrolly.selectAll(".scrolly__content");
+      var step = content.selectAll(".step");
+    
+      // initialize the scrollama
+      var scroller = scrollama();
+    
+      // generic window resize listener event
+      function handleResize() {
+        // 1. update height of step elements
+        var stepH = Math.floor(window.innerHeight * 1);
+        step.style("height", stepH + "px");
+    
+        var figureHeight = window.innerHeight * 0.75;
+        var figureMarginTop = (window.innerHeight - figureHeight) / 2;
+    
+        chart
+          .style("height", figureHeight + "px")
+          .style("top", figureMarginTop + "px");
+    
+        // 3. tell scrollama to update new element dimensions
+        scroller.resize();
+      }
+    
+      // scrollama event handlers
+      function handleStepEnter(response) {
+        const textblock = step.selectAll(".text-block");
+
+        // add color to current step only
+        textblock.classed("is-active", function(d, i) {
+          return i === response.index;
+        });
+    
+        // update graphic based on step
+        const linkHead = 'https://flo.uri.sh/story/1652368/embed#slide-' //1485195 1497712 1457332
+        const slide = response.index
+
+        d3.selectAll('.scrolly__chart iframe')
+          .attr('src', linkHead + slide);
+      }
+    
+      function setupStickyfill() {
+        d3.selectAll(".sticky").each(function() {
+          Stickyfill.add(this);
+        });
+      }
+    
+      function init() {
+        setupStickyfill();
+        handleResize();
+        scroller
+          .setup({
+            step: "#scrolly__section .scrolly__content .step",
+            offset: 0.7,
+            // debug: true
+          })
+          .onStepEnter(handleStepEnter);
+    
+        // setup resize event
+        window.addEventListener("resize", handleResize);
+      }
+    
+      init();
+
+
+      var svg = d3.select("#chart-area3")
+        .append("svg")
+        .attr("width", 960)
+        .attr("height", 500);
+
+function circleTransition() { 
+
+    var timeCircle = svg.append("circle")
+        .attr("fill", "darkred")
+        .attr("r", 30);
+    repeat();
+    
+    function repeat() {
+      timeCircle
+        .attr('cx', 40)     
+        .attr('cy', 250)     
+        .transition()        
+        .duration(350)      
+        .attr('cx', 700)   
+        .transition()       
+        .duration(4000)   
+        .attr('cx', 40)     
+        .on("end", repeat);  
+    };
+
+};
+
+circleTransition();
+    </script>  
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>  
+  </body>
+</html>
